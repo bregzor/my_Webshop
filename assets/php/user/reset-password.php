@@ -7,10 +7,7 @@ $token = random_bytes(32);
 
 $email = $_POST["email"];
 $hash_token = password_hash($token, PASSWORD_DEFAULT);
-
-
 $result = "";
-
 
 $sql = "UPDATE users SET token=:token WHERE email=:email";
 $stmt = $db->prepare($sql);
@@ -18,7 +15,7 @@ if($stmt->execute([
     ':token' => $hash_token ,
     ':email' => $email,
 ])){
-  $result = "OK";
+   $result = "OK";
 } else {
     $result = "FAIL";
 };
@@ -38,7 +35,5 @@ $headers .= "Content-type: text/html\r\n";
 //  $result = "FAIL to send mail";
 // };
 echo $result;
-
-
 
 ?>

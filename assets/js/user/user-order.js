@@ -3,7 +3,6 @@ const initUserOrder = () => {
 	document.querySelector("#uid").value = ID;
 }
 
-
 const populateOrderForm = () => {
 	const inputs = document.querySelectorAll("input");
 	inputs.forEach(input => {

@@ -29,7 +29,6 @@ const validateToken = () => {
       });
 };
 
-
 const validateSamePassword = () => {
   const pass1 = document.querySelector("#password1");
   const pass2 = document.querySelector("#password2");
@@ -70,7 +69,6 @@ const resetPassword = () => {
   const passwordContainer = document.querySelector("#pass-container");
   const modalActions = document.querySelector(".modal__actions");
   const email = document.querySelector("#name");
- // email.setAttribute("oninput", "validateEmail()");
   form.firstElementChild.textContent = "Reset password";
   passwordContainer.style.display = "none";
   button.textContent = "SEND RESETCODE";

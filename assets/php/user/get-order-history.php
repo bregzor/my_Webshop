@@ -9,6 +9,13 @@ $userID = $_POST["user_id"];
 $sql = "SELECT ID from orders WHERE user_ID = :id";
 $stmt = $db->prepare($sql);
 $stmt->execute([':id' => $userID]);
+$id = $stmt->fetch(PDO::FETCH_ASSOC)["ID"];
+
+$sql = "SELECT * from ordered_products WHERE ID=:id";
+$stmt = $db->prepare($sql);
+$stmt->execute([':id' => $id]);
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
 //$sql = "SELECT * from ordered_products WHERE ID = "
 
