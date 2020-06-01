@@ -87,6 +87,7 @@ const resetPassword = () => {
         return response.text();
       })
       .then((reset) => {
+        console.log(response);
         if (reset === "OK") {
           const resetHTML = `
       <label for='token'><span>Enter resetcode</span>
