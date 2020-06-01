@@ -1,7 +1,9 @@
+
+const initPasswordCheck = () => {
+
 const strengthMeter = document.getElementById('strength-meter')
 const passwordInput = document.getElementById('password')
 const reasonsContainer = document.getElementById('reasons')
-
 
 if(document.getElementById('password')) {
 	passwordInput.addEventListener('input', updateStrengthMeter)
@@ -12,7 +14,6 @@ if(document.getElementById('password')) {
 
 function updateStrengthMeter() {
   const weaknesses = calculatePasswordStrength(passwordInput.value)
-
   let strength = 100
   reasonsContainer.innerHTML = ''
   weaknesses.forEach(weakness => {
@@ -20,7 +21,7 @@ function updateStrengthMeter() {
     strength -= weakness.deduction
     const messageElement = document.createElement('div')
     messageElement.innerText = weakness.message
-    reasonsContainer.appendChild(messageElement)
+    //reasonsContainer.appendChild(messageElement)
   })
   strengthMeter.style.setProperty('--strength', strength)
 }
@@ -97,4 +98,5 @@ function repeatCharactersWeakness(password) {
       deduction: matches.length * 10
     }
   }
+}
 }

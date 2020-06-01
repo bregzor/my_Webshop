@@ -8,19 +8,19 @@ const template = (type) => {
 	  case "login":
 
 		returnHTML = `<form class='modal__user-form' method='POST' id='login-form'>
-		<h3>Login</h3>
+		<h3>LOGIN TO MY DREAMSHOP</h3>
 		<label for'name'>
-		<span>Enter e-mail</span>
+		<span>ENTER E-MAIL</span>
 		<input type='email' id='name' name='email'></input>
 		</label>
-		<label id="pass-container" for'password'>
-		<span>Enter password</span>
+		<label id="pass-container" for'password' style='margin-top:10px'>
+		<span>ENTER PASSWORD</span>
 		<input type='password' id='password' name='password'></input>
 		</label>
 		<div class='modal__response'></div>
 		<button type='button' name='create' onclick='loginUser()' class='user-button user-button--login'>SIGN IN</button>
 		<div class='modal__actions'>
-		<a href="javascript:void(0)" onclick='resetPassword()'>Forgotten my password?</a>
+		<a href="javascript:void(0)" onclick='resetPassword()'>FORGOTTEN MY PASSWORD</a>
 		<a href="javascript:void(0)" onclick='drawCreate()'>CREATE ACCOUNT</a>
 		</div>
 		</form>`;
@@ -29,7 +29,7 @@ const template = (type) => {
 	  case "profile":
 		const data = getUserFromStorage();
 		returnHTML = `<div class="modal__user-profile">
-		<div class='modal__user-profile-history'><i class="fas fa-history"></i></div> 
+		<div class='modal__user-profile-history'></div> 
 		<div class='modal__user-profile-cred'><i class="fas fa-user-circle"></i>
 		<div class='modal__user-profile-cred-wrap'>
 		<p>E-mail: ${data["email"]}</p>
@@ -40,7 +40,7 @@ const template = (type) => {
 		<p>${data["phone"]}</p>
 		</div>
 		</div>
-		<p onclick='logoutUser()'>Logout</p>
+		<button type='button' onclick='logoutUser()' class='user-button user-button--login'>LOGOUT</button>
 	  </div>`;
 	  break;
 
@@ -53,12 +53,18 @@ const template = (type) => {
 			  <input type='text' name='username' id='name' required></input>
 		  </label>
 		  <label for='mail'>
-			  <span class='modal__user-form__span' >E-mail</span>
+			  <span class='modal__user-form__span' >E-MAIL</span>
 			  <input type='email' name='mail' id='mail' required oninput='validateEmail()' ></input>
 			  <p class='mail_error'></p>
 		  </label>
+		  <label for='password'>
+		  <span class='modal__user-form__span'>PASSWORD</span>
+		  <input type='password' name='password' id='password' required></input>
+		  <div class="strength-meter" id="strength-meter"></div>
+		  <div id="reasons" class="reasons"></div>	
+		  </label>
 		  <label for='firstname'>
-		  <span class='modal__user-form__span'>Name</span>
+		  <span class='modal__user-form__span'>FULL NAME</span>
 		  <input type='text' name='firstname' id='firstname' required></input>
 		  </label>
 		  <label for='lastname' style="display:none">
@@ -66,31 +72,25 @@ const template = (type) => {
 		  <input type='text' name='lastname' id='lastname' required></input>
 		  </label>
 		  <label for='address'>
-		  <span class='modal__user-form__span'>Address</span>
+		  <span class='modal__user-form__span'>STREET</span>
 		  <input type='text' name='street' id='address' required></input>
 		  </label>
 		  <label for='zip'>
-		  <span class='modal__user-form__span'>Zipcode</span>
+		  <span class='modal__user-form__span'>ZIP</span>
 		  <input type='number' name='zip' id='zip' required></input>
 		  </label>
 		  <label for='cit'>
-		  <span class='modal__user-form__span'>City</span>
+		  <span class='modal__user-form__span'>CITY</span>
 		  <input type='text' name='city' id='cit' required></input>
 		  </label>
-		  <label for='password'>
-			  <span class='modal__user-form__span'>Password</span>
-			  <input type='password' name='password' id='password' required></input>
-			  <div class="strength-meter" id="strength-meter"></div>
-			  <div id="reasons" class="reasons"></div>	
-			  </label>
 		  <label for='phone'>
-			  <span class='modal__user-form__span' >Phone</span>
+			  <span class='modal__user-form__span' >PHONE</span>
 			  <input type='number' name='phone' id='phone' required ></input>
 		  </label>
-		  <button type='button' name='create' id="create-user-btn" onclick="createUser()" >Create</button>
+		  <button type='button' name='create' id="create-user-btn" class='user-button user-button--login' onclick="validateUserAndCreate()" >CREATE ACCOUNT</button>
 		  <div class='modal__response'></div>
-		  <a href='javascript:void(0)' id='login' onclick="drawUser()">Go to login</a>
-		  </form>`;
+		  <button type='button' id="login" class='user-button user-button--login' onclick="drawUser()" >GO TO LOGIN</button>
+		   </form>`;
 		  break;
 
 	  default:

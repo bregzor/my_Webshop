@@ -1,5 +1,25 @@
+const validateUserAndCreate = () => {
+	const allInput = document.querySelectorAll(".modal__user-form input")
+	let count = 0;
+	const missingFields = [];
+	Array.from(allInput).forEach(input => {		
+	if(input.value.length > 0) {
+		count++;
+	} else {
+		missingFields.push(input);
+	}
+	});
+	if(count >= 7) {
+		createUser();
+	} else {
+		missingFields.forEach(field => {
+			field.style.border = "1px solid #98250a";
+		});
+		count = 0;
+	}
+  }
+
 const createUser = () => {
-	//d/ocument.querySelector(".modal").innerHTML = template("create");
 	const formElement = document.querySelector("#user-form");
 	const formData = new FormData(formElement);
 	event.preventDefault();
@@ -21,3 +41,4 @@ const createUser = () => {
 		}
 	  });
   };
+
