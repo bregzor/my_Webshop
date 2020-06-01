@@ -43,8 +43,11 @@
     <script src="./assets/js/search.js"></script>
     
 
+  
+    <script src="./assets/js/user/password-validation.js"></script>
     <script src="./assets/js/user/get-user-data.js"></script>
     <script src="./assets/js/user/templates.js"></script>
+    <script src="./assets/js/user/order-history.js"></script>
     <script src="./assets/js/user/login-user.js"></script>
     <script src="./assets/js/user/create-user.js"></script>
     <script src="./assets/js/user/logout-user.js"></script>
@@ -52,9 +55,6 @@
     <script src="./assets/js/user/reset-password.js"></script>
     <script src="./assets/js/user/user-global.js"></script>
     <script src="./assets/js/user/login-init.js"></script>
-    <script src="./assets/js/password-validation.js"></script>
-
-
-    <script src="./assets/js/password-validation.js"></script>
+    
 </body>
 </html>

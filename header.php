@@ -12,7 +12,7 @@
     <div class="header__nav">
       <span class="header__nav-line"></span>
     </div>
-    <a class="header__headline" href="javascript:void(0)" id="create-users"><img class="header__logo" src="assets/media/Logo.png" alt=""></a>
+    <a class="header__headline" href="index.php" id="create-users"><img class="header__logo" src="assets/media/Logo.png" alt=""></a>
   </div>
   <form action="searchProd.php" action="POST" class="header__form" onsubmit="return checkForm(this);">
     <input type=" text" name="searchWord" class="header__search" placeholder="" />

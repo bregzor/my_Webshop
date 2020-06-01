@@ -62,7 +62,7 @@
         ':city' => $city,
         ':total' => $total,
         ':delivery_fee' => $delivery,
-        ':userid'=> $user_id
+        ':userid'=> $user_id,
         ]);
 
         $redirectID = $pdo->lastInsertId();

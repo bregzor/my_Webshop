@@ -1,45 +1,68 @@
 <?php 
-header("Content-Type: application/json; charset=UTF-8");
+
 require_once 'db.php';
 
-$orderObject = [];
 $userID = $_POST["user_id"];
+$HTML = null;
 
 
-$sql = "SELECT ID from orders WHERE user_ID = :id";
-$stmt = $db->prepare($sql);
-$stmt->execute([':id' => $userID]);
-$id = $stmt->fetch(PDO::FETCH_ASSOC)["ID"];
-
-$sql = "SELECT * from ordered_products WHERE ID=:id";
-$stmt = $db->prepare($sql);
-$stmt->execute([':id' => $id]);
-$row = $stmt->fetch(PDO::FETCH_ASSOC);
-
-
-//$sql = "SELECT * from ordered_products WHERE ID = "
-
-$sql = "SELECT 
-    orders.*, orders.name AS order_name, 
-    products. *, products.name AS prod_name, 
-    ordered_products.order_id AS order_id, 
-    ordered_products.product_id, ordered_products.quantity
-    FROM orders, ordered_products, products 
-    WHERE orders.user_id = :id";
-
+    $sql = "SELECT * from orders WHERE user_id=:id";
     $stmt = $db->prepare($sql);
     $stmt->execute([':id' => $userID]);
 
+    //GET ALL ORDERS
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-        $orders = array(
-            "image"=>$row['image'],
-            "prodname"=>$row['prod_name'],
-            "quantity"=>$row['quantity'],
-            "total"=>$row['total']
-        );
-        $orderObject[] = $orders;
+        
+        $HTML .= "<div class='modal__user-profile__item'>
+          <p>total ". $row["total"] . "</p>";
+        
+        //GETS PRODUCT ID AND QUANTITY 
+        $id = $row["ID"];
+        $sql = "SELECT * from ordered_products WHERE order_id=:ordid";
+        $stmt2 = $db->prepare($sql);
+        $stmt2->execute([':ordid' => $id]);
+        $row2 = $stmt2->fetch(PDO::FETCH_ASSOC);
+        
+        $HTML .= "<p>Quantity: " .$row2["quantity"] . "</p>";
+
+        //GET ALL PRODUCT INFO
+        $pID = $row2["product_id"];
+        $sql = "SELECT * from products WHERE ID=:pid";
+        $stmt3 = $db->prepare($sql);
+        $stmt3->execute([':pid' => $pID]); 
+        $row3 =  $stmt3->fetch(PDO::FETCH_ASSOC);
+        $HTML .=  "
+        <p>". $row3["name"] . "</p>
+        <img width='150px' src='./admin/images/". $row3["image"] . "'>";
+       
+        //     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        //        "; 
+        //     }
+ 
+
+
+
+
+        // while ($row = $stmt2->fetch(PDO::FETCH_ASSOC)) {    
+        //    // $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        //     $HTML .= "<p>Quantity: " .$row["quantity"] . "</p>";
+        // }
+        
+        
+        //$pID = $stmt->fetch(PDO::FETCH_ASSOC)["product_id"];
+         
+
+            
+        // }
+
+        // while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+        //     $HTML .= "<p>Product: ". $row["name"] . "</p>";
+        //     
+        // }
+
+       $HTML .= "</div>";
+
     }
 
-    $json = json_encode($orderObject, JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT);
-    echo $json
+    echo $HTML;
 ?>
